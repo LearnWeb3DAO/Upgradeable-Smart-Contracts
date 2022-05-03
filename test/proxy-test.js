@@ -1,4 +1,4 @@
-const { expect, assert } = require("chai");
+const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const hre = require("hardhat");
 
@@ -7,16 +7,15 @@ describe("ERC721 Upgradeable", function () {
     const LW3NFT = await ethers.getContractFactory("LW3NFT");
     const LW3NFT2 = await ethers.getContractFactory("LW3NFT2");
 
-    const deployedLW3NFT = await hre.upgrades.deployProxy(LW3NFT, {
+    let proxyContract = await hre.upgrades.deployProxy(LW3NFT, {
       kind: "uups",
     });
     const [owner] = await ethers.getSigners();
-    assert((await deployedLW3NFT.ownerOf(1)) === owner.address);
+    const ownerOfToken1 = await proxyContract.ownerOf(1);
 
-    const deployedLW3NFT2 = await hre.upgrades.upgradeProxy(
-      deployedLW3NFT,
-      LW3NFT2
-    );
-    assert((await deployedLW3NFT2.test()) === "upgraded");
+    expect(ownerOfToken1).to.equal(owner.address);
+
+    proxyContract = await hre.upgrades.upgradeProxy(proxyContract, LW3NFT2);
+    expect(await proxyContract.test()).to.equal("upgraded");
   });
 });
