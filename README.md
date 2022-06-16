@@ -242,7 +242,7 @@ describe("ERC721 Upgradeable", function () {
 
 ```
 
-Lets see whats happening here, We first get the `LW3NFT` and `LW3NFT` instance using the `getContractFactory` function which is common to all the levels we have been teaching till now. After that the most important line comes in which is:
+Lets see whats happening here, We first get the `LW3NFT` and `LW3NFT2` instance using the `getContractFactory` function which is common to all the levels we have been teaching till now. After that the most important line comes in which is:
 
 ```solidity
 let proxyContract = await hre.upgrades.deployProxy(LW3NFT, {
