@@ -2,6 +2,8 @@
 
 We know that smart contracts on Ethereum are not upgradeable, as the code is immutable and cannot be changed once it is deployed. But writing perfect code the first time around is hard, and as humans we are all prone to making mistakes. Sometimes even contracts which have been audited turn out to have bugs that cost them millions.
 
+<Quiz questionId="591dbc1d-11f2-42ab-9f14-bd17174395ca" />
+
 In this level, we will learn about some design patterns that can be used in Solidity to write upgradeable smart contracts.
 
 ## How does it work?
@@ -16,7 +18,12 @@ The `Proxy Contract` is responsible for managing the state of the contract which
 
 ![](https://i.imgur.com/NpGQqsL.png)
 
+<Quiz questionId="52b0dea1-bf3d-4baa-89b5-7464eb62ae9a" />
+<Quiz questionId="47df78f6-01be-4e17-a7f4-f4ce4e574dfa" />
+
 This pattern becomes interesting when `Implementation Contract` can be replaced which means the logic which is executed can be replaced by another version of the `Implementation Contract` without affecting the state of the contract which is stored in the proxy.
+
+<Quiz questionId="46c61058-42b5-479e-af9c-4d2ff49147bd" />
 
 There are mainly three ways in which we can replace/upgrade the `Implementation Contract`:
 
@@ -28,15 +35,19 @@ We will however only focus on Transparent and UUPS because they are the most com
 
 To upgrade the `Implementation Contract` you will have to use some method like `upgradeTo(address)` which will essentially change the address of the `Implementation Contract` from the old one to the new one.
 
+<Quiz questionId="b5a09112-a3ba-40fc-b7d9-88e3a109d181" />
+
 But the important part lies in where should we keep the `upgradeTo(address)` function, we have two choices that are either keep it in the `Proxy Contract` which is essentially how `Transparent Proxy Pattern` works, or keep it in the `Implementation Contract` which is how the UUPS contract works.
 
 ![](https://i.imgur.com/KVY1nHq.png)
 
-Another important thing to note about this `Proxy pattern` is that the constructor of the `Implementation Contract` is never executed.
+Another important thing to note about this `Proxy Pattern` is that the constructor of the `Implementation Contract` is never executed.
 
 When deploying a new smart contract, the code inside the constructor is not a part of the contract's runtime bytecode because it is only needed during the deployment phase and runs only once. Now because when `Implementation Contract` was deployed it was initially not connected to the `Proxy Contract` as a reason any state change that would have happened in the constructor is now not there in the `Proxy Contract` which is used to maintain the overall state.
 
 As a reason `Proxy Contracts` are unaware of the existence of constructors. Therefore, instead of having a constructor, we use something called an `initializer` function which is called by the `Proxy Contract` once the `Implementation Contract` is connected to it. This function does exactly what a constructor is supposed to do but is now included in the runtime bytecode as it behaves like a regular function and is callable by the `Proxy Contract`.
+
+<Quiz questionId="6e98af35-e469-4cca-9dab-9fb1e707aa60" />
 
 Using OpenZeppelin contracts, you can use their `Initialize.sol` contract which makes sure that your `initialize` function is executed only once just like a contructor
 
@@ -60,9 +71,9 @@ contract MyContract is Initializable {
 
 Above given code is from [Openzeppelin's documentation](https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies#the-constructor-caveat) and provides an example of how the `initializer` modifier ensures that the `initialize` function can only be called once. This modifier comes from the `Initializable Contract`
 
-We will now study Proxy patterns in detail 🚀 👀
+<Quiz questionId="3d2b995a-bafd-4f5d-9a46-4f4b0c05f46d" />
 
-Lets goo!!!!
+We will now study Proxy patterns in detail 🚀 👀
 
 ## Transparent Proxy Pattern
 
@@ -168,6 +179,8 @@ Lets try to understand what's happening in this contract in a bit more detail
 If you look at all the contracts which `LW3NFT` is importing, you will realize why they are important. First being the `Initializable` contract from Openzeppelin which provides us with the `initializer` modifier which ensures that the `initialize` function is only called once. The `initialize` function is needed because we cant have a contructor in the `Implementation Contract` which in this case is the `LW3NFT` contract
 
 It imports `ERC721Upgradeable` and `OwnableUpgradeable` because the original `ERC721` and `Ownable` contracts have a constructor which cant be used with proxy contracts.
+
+<Quiz questionId="b66fc85b-6fb8-403c-9e99-7ff78d38e6b1" />
 
 Lastly we have the `UUPSUpgradeable Contract` which provides us with the `upgradeTo(address)` function which has to be put on the `Implementation Contract` in case of a `UUPS` proxy pattern.
 
@@ -279,3 +292,7 @@ LFG 🚀
 
 - [OpenZeppelin Docs](https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies)
 - [OpenZeppelin Youtube](https://www.youtube.com/watch?v=kWUDTZhxKZI)
+
+<Quiz questionId="60e8e9c3-6d69-48a2-bb17-51995aec6a43" />
+
+<SubmitQuiz />
