@@ -255,7 +255,7 @@ describe("ERC721 Upgradeable", function () {
 
 ```
 
-Lets see whats happening here, We first get the `LW3NFT` and `LW3NFT` instance using the `getContractFactory` function which is common to all the levels we have been teaching till now. After that the most important line comes in which is:
+Lets see whats happening here, We first get the `LW3NFT` and `LW3NFT2` instance using the `getContractFactory` function which is common to all the levels we have been teaching till now. After that the most important line comes in which is:
 
 ```solidity
 let proxyContract = await hre.upgrades.deployProxy(LW3NFT, {
@@ -274,7 +274,7 @@ Now the next part comes in where we want to deploy `LW3NFT2` which is the upgrad
 For that we execute the `upgradeProxy` method again from the `@openzeppelin/hardhat-upgrades` library which upgrades and replaces `LW3NFT` with `LW3NFT2` without changing the state of the system
 
 ```javascript
-proxyContract = await hre.upgrades.upgradeProxy(deployedLW3NFT, LW3NFT2);
+proxyContract = await hre.upgrades.upgradeProxy(proxyContract, LW3NFT2);
 ```
 
 To test if it was actually replaced we call the `test()` function, and ensured that it returned `"upgraded"` even though that function wasn't present in the original `LW3NFT` contract.
