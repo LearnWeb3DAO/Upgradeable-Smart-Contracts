@@ -279,7 +279,13 @@ proxyContract = await hre.upgrades.upgradeProxy(proxyContract, LW3NFT2);
 
 To test if it was actually replaced we call the `test()` function, and ensured that it returned `"upgraded"` even though that function wasn't present in the original `LW3NFT` contract.
 
-Here you go, you learn how to upgrade a smart contract today.
+To run this test, open up your terminal pointing to the root of the directory for this level and execute this command:
+
+```bash
+npx hardhat test
+```
+
+If all your tests passed, this means that you have learned how to upgrade a smart contract.
 
 LFG 🚀
 
