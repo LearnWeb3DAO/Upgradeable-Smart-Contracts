@@ -49,7 +49,7 @@ As a reason `Proxy Contracts` are unaware of the existence of constructors. Ther
 
 <Quiz questionId="6e98af35-e469-4cca-9dab-9fb1e707aa60" />
 
-Using OpenZeppelin contracts, you can use their `Initialize.sol` contract which makes sure that your `initialize` function is executed only once just like a contructor
+Using OpenZeppelin contracts, you can use their `Initialize.sol` contract which makes sure that your `initialize` function is executed only once just like a constructor
 
 ```solidity
 // contracts/MyContract.sol
@@ -176,7 +176,7 @@ contract LW3NFT is Initializable, ERC721Upgradeable, UUPSUpgradeable, OwnableUpg
 
 Lets try to understand what's happening in this contract in a bit more detail
 
-If you look at all the contracts which `LW3NFT` is importing, you will realize why they are important. First being the `Initializable` contract from Openzeppelin which provides us with the `initializer` modifier which ensures that the `initialize` function is only called once. The `initialize` function is needed because we cant have a contructor in the `Implementation Contract` which in this case is the `LW3NFT` contract
+If you look at all the contracts which `LW3NFT` is importing, you will realize why they are important. First being the `Initializable` contract from Openzeppelin which provides us with the `initializer` modifier which ensures that the `initialize` function is only called once. The `initialize` function is needed because we cant have a constructor in the `Implementation Contract` which in this case is the `LW3NFT` contract
 
 It imports `ERC721Upgradeable` and `OwnableUpgradeable` because the original `ERC721` and `Ownable` contracts have a constructor which cant be used with proxy contracts.
 
