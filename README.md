@@ -108,10 +108,10 @@ Lets build an example where you can experience how to build an upgradeable contr
   npm install --save-dev hardhat
   ```
 
-- If you are on Windows, please do this extra step and install these libraries as well :)
+- If you are on Windows, please do this extra step and install this plugin as well :)
 
   ```bash
-  npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers
+  npm install --save-dev @nomicfoundation/hardhat-toolbox
   ```
 
 - In the same directory where you installed Hardhat run:
