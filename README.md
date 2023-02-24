@@ -226,7 +226,7 @@ Pretty easy right? 🤯
 
 Wow 🙌 , okay we are done with writing the `Implementation Contract`, do we now need to write the `Proxy Contract` as well?
 
-Good news is nope, we dont need to write the `Proxy Contract` because `Openzeppelin` deploys and connects a `Proxy Contract` automatically when we use there library to deploy the `Implementation Contract`.
+Good news is nope, we dont need to write the `Proxy Contract` because `Openzeppelin` deploys and connects a `Proxy Contract` automatically when we use their library to deploy the `Implementation Contract`.
 
 So lets try to do that, In your `test` directory create a new file named `proxy-test.js` and lets have some fun with code
 
